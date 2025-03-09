@@ -1,0 +1,76 @@
+/**
+ * Author: Ike Iloegbu 
+ *
+ * Prime Checker Web Application
+ *
+ * This HTML and JavaScript application allows users to check whether a number
+ * (from 2 to 9999) is a prime number. The user inputs a number in the input field,
+ * and upon clicking the "Submit" button, the application evaluates the primality
+ * of the entered number and displays the result.
+ *
+ * Note:
+ * - No input validation or exception handling is implemented, as per class instruction.
+ * - Strings or other invalid entries may behave unexpectedly (e.g., strings return as prime numbers).
+ */
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Prime Checker</title>
+  <script>
+    /**
+     * isPrime function retrieves a number from the input field,
+     * evaluates whether it is a prime number, and displays the result.
+     *
+     * Algorithm:
+     * - If the number is 2, it is prime.
+     * - If the number is less than 2 or even (except 2), it is not prime.
+     * - Otherwise, checks for factors up to the square root of the number.
+     */
+    function isPrime() {
+        // Retrieve and parse the input number
+        var number = parseInt(document.getElementById("nbr").value);
+
+        // Assume the number is prime until proven otherwise
+        var prime = true;
+
+        if (number === 2) {
+            prime = true;
+        } else if (number < 2 || number % 2 === 0) {
+            prime = false;
+        } else {
+            // Check divisibility by odd numbers starting from 3
+            for (var i = 3; i * i <= number; i += 2) {
+                if (number % i === 0) {
+                    prime = false;
+                    break;
+                }
+            }
+        }
+
+        // Display the result
+        if (prime) {
+            document.getElementById("outputName").textContent = number + " is a prime number.";
+        } else {
+            document.getElementById("outputName").textContent = number + " is not a prime number.";
+        }
+    }
+  </script>
+</head>
+<body>
+
+    <!-- Prime Checker Heading -->
+    <h1 style="color:rgb(0, 42, 255)">Prime Checker</h1>
+    
+    <!-- Input Label and Field -->
+    <label>Enter a number from 2 to 9999</label>
+    <input type="number" id="nbr"> <br>
+
+    <!-- Submit Button -->
+    <button onclick="isPrime()">Submit</button>
+
+    <!-- Output Paragraph -->
+    <p id="outputName">I'm waiting...</p>
+
+</body>
+</html>
